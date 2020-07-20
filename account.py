@@ -1,10 +1,16 @@
-lass BankAccount:
-  bank="Equity"
-  def __init__(self,first_name,last_name):
+class BankAccount:
+  
+  def __init__(self,first_name,last_name,bank,phone_no):
     self.first_name=first_name
     self.last_name=last_name
+    self.bank=bank
+    self.phone_no=phone_no
     self.balance=0
-    
+    self.withdraw_statement = []
+        self.deposit_statement = []
+        self.loan_balance = 0
+
+
   def account_name(self):
     name="{} account for {} {}".format(self.bank,self.first_name,self.last_name)
     return name
@@ -13,42 +19,42 @@ lass BankAccount:
     return "The balance for {} is {}. ". format(self.account_name(),self.balance) 
   
   def deposit(self,amount):
-    if amount > 0:
-     self.balance += amount
-     print("You have deposited {} to your account".format(amount))
+    if amount <= 0:
+       print("you cannot deposit zero or negative")
     else:
-      print("you can not deposit {} amount")
-  
-
+        self.balance +=amount
+        print("you have deposited {} to {}".format(amount,self.account_name()))
   def withdraw(self,amount):
-    if amount > 0:
-     self.balance -= amount
-     print("You have withdrawn {} from your account".format(amount))
+    if amount <=0:
+     print("You cannot withdraw  zero or negative")
+    elif amount>self.balance:
+        print("you have insufficient balance")
     else:
-      print("Kindly,you cannot withdraw {} amount")
+         self.balance -=amount
+         print("you have withdrawn {} from {}".format(amount,self.account_name()))
   
       
+    def lend_loan(self, loan):
+      if loan <= 0:
+        print("Invalid request")
+        
+      else: 
+        self.loan_balance += loan
+        print("{} you have borrowed {}".format(self.account_name(), loan))
+      
+    def pay_loan(self, loan):
+      if loan <= 0:
+        print("Invalid amount to reduce your loan")
+      else:
+        self.loan_balance -= loan
+        print(" You have repaid {}".format(loan))
+      
+    def deposit_statement(self, amount):
+      self.deposit(self, amount)
+      
+      return self.deposit_summary.append(amount)
+      
+      
+       
+      
     
-acc1=BankAccount("Grace","Kimani")
-acc2=BankAccount("Pesh","Njeri")
-print (acc1.account_name())
-print (acc2.account_name())
-acc1.deposit(500)
-acc2.deposit(79)
-acc1.deposit(150)
-acc2.deposit(209)
-acc2.deposit(50)
-acc1.deposit(300)
-
-acc1.withdraw(500)
-acc2.withdraw(150)
-acc1.withdraw(200)
-acc2.withdraw(90)
-acc1.withdraw(70)
-acc2.withdraw(170)
-
-
-print(acc2.get_balance())
-print(acc1.get_balance())
-print(acc1.account_name())
-print (acc2.account_name())
